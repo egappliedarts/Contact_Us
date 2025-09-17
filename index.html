@@ -6,19 +6,16 @@
     <title>المعهد العالي للفنون التطبيقية</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts - Inter & Cairo -->
+    <!-- Google Fonts - Cairo -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         body {
             font-family: 'Cairo', sans-serif;
             background-color: #f0f0f0;
-            color: #000;
-        }
-        .text-black {
             color: #000;
         }
         .bg-red-custom {
@@ -32,29 +29,36 @@
         }
         .slider-image {
             width: 100%;
-            height: 400px;
+            height: 300px;
             object-fit: cover;
         }
         @media (max-width: 768px) {
             .slider-image {
-                height: 250px;
+                height: 200px;
             }
         }
     </style>
 </head>
-<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+<body class="bg-gray-100 flex items-center justify-center min-h-screen p-4">
 
-    <div class="container mx-auto p-4 md:p-8 max-w-4xl">
+    <!-- Main Profile Card Container -->
+    <div class="w-full max-w-lg mx-auto bg-white rounded-3xl shadow-2xl overflow-hidden transform transition-all duration-300 hover:scale-105">
+
+        <!-- Institute Logo Section -->
+        <div class="flex justify-center p-8 bg-white -mt-16">
+            <!-- Logo - Placeholder -->
+            <img src="Logo.jpg" alt="شعار المعهد" class="rounded-full shadow-lg border-4 border-red-custom transform transition-transform hover:scale-110">
+        </div>
 
         <!-- Slider Section -->
-        <div class="relative w-full overflow-hidden rounded-2xl shadow-xl border border-red-custom mb-8">
+        <div class="relative w-full overflow-hidden mb-6 mt-6">
             <div id="image-slider" class="flex transition-transform duration-500 ease-in-out">
-                <!-- Slider Images - Placeholder, you can replace with your own images -->
+                <!-- Slider Images - Placeholder -->
                 <img src="03.jpg" alt="Slider Image 1" class="slider-image flex-shrink-0">
                 <img src="04.jpg" alt="Slider Image 2" class="slider-image flex-shrink-0">
                 <img src="05.jpg" alt="Slider Image 3" class="slider-image flex-shrink-0">
-                <img src="06.jpg" alt="Slider Image 4" class="slider-image flex-shrink-0">
-                <img src="07.jpg" alt="Slider Image 5" class="slider-image flex-shrink-0">
+                <img src="06.jpg" alt="Slider Image 3" class="slider-image flex-shrink-0">
+                <img src="07.jpg" alt="Slider Image 3" class="slider-image flex-shrink-0">
             </div>
             <!-- Slider Navigation Buttons -->
             <button onclick="prevSlide()" class="absolute top-1/2 right-4 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full hover:bg-black/80 transition-all">
@@ -65,14 +69,8 @@
             </button>
         </div>
 
-        <!-- Institute Logo -->
-        <div class="flex justify-center mb-8">
-            <!-- Logo - You can replace this placeholder image with the actual logo URL -->
-            <img src="Logo.jpg" alt="شعار المعهد" class="rounded-full shadow-lg border-4 border-white transform transition-transform hover:scale-105">
-        </div>
-
         <!-- About Section -->
-        <div class="bg-white p-6 md:p-8 rounded-2xl shadow-lg mb-8 transition-transform hover:scale-105">
+        <div class="p-6 md:p-8">
             <h2 class="text-3xl font-bold text-center text-red-custom mb-4">نبذة عن المعهد</h2>
             <p class="text-lg text-black text-center leading-relaxed">
                 المعهد العالى للفنون التطبيقية بمدينه السادس من أكتوبر معهد عالى خاص تابع لجمعية الخدمات الثقافية لرعاية الفنون المشهرة تحت رقم 1173 لسنه 1994 ويخضع لاشراف وزاره التعليم العالى. وانشئ المعهد بالقرار الوزارى رقم 1448 لسنه 1994 ويمنح المعهد درجة البكالوريوس فى الفنون التطبيقية والمعادلة من المجلس الاعلى للجامعات لدرجة البكالوريوس التى تمنحها الجامعات المصرية وقد انتهجت إدارة المعهد توقيع عده اتفاقيات فى مجال التعاون العلمى والبحوث المشتركة والدراسات العليا مع عدد من الجامعات ذات السمعه العالية.
@@ -80,7 +78,7 @@
         </div>
 
         <!-- Social Media Links Section -->
-        <div class="bg-white p-6 md:p-8 rounded-2xl shadow-lg transition-transform hover:scale-105">
+        <div class="bg-gray-50 p-6 md:p-8 border-t border-gray-200">
             <h2 class="text-3xl font-bold text-center text-red-custom mb-6">روابط التواصل</h2>
             <div class="flex flex-wrap justify-center items-center gap-6">
                 <!-- Website Link -->
@@ -162,5 +160,3 @@
     </script>
 </body>
 </html>
-
-
