@@ -17,6 +17,7 @@
             font-family: 'Cairo', sans-serif;
             background-color: #f0f0f0;
             color: #000;
+            overflow-x: hidden;
         }
         .bg-red-custom {
             background-color: #dc2626; /* A shade of red for the accent color */
@@ -27,136 +28,190 @@
         .border-red-custom {
             border-color: #dc2626;
         }
-        .slider-image {
+        .header-slider {
             width: 100%;
-            height: 300px;
-            object-fit: cover;
+            height: 350px;
+            position: relative;
+            overflow: hidden;
         }
-        @media (max-width: 768px) {
-            .slider-image {
-                height: 200px;
-            }
+        .header-slider .slide {
+            background-size: cover;
+            background-position: center;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+        .header-slider .slide.active {
+            opacity: 1;
+        }
+        .header-slider .slide::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4); /* Dark overlay */
+        }
+        .logo-container {
+            position: absolute;
+            bottom: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 20;
+        }
+        
+        /* Splash Screen Styles */
+        #splash-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 1s ease-in-out;
+            z-index: 9999;
+        }
+        .splash-logo {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        /* Fade-in animation for main content */
+        .fade-in {
+            animation: fadeIn 1s ease-in-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
-<body class="bg-gray-100 flex items-center justify-center min-h-screen p-4">
+<body>
 
-    <!-- Main Profile Card Container -->
-    <div class="w-full max-w-lg mx-auto bg-white rounded-3xl shadow-2xl overflow-hidden transform transition-all duration-300 hover:scale-105">
+    <!-- Splash Screen -->
+    <div id="splash-screen">
+        <img src="Logo.jpg" alt="شعار المعهد" class="splash-logo">
+    </div>
 
-        <!-- Institute Logo Section -->
-        <div class="flex justify-center p-8 bg-white -mt-16">
-            <!-- Logo - Placeholder -->
-            <img src="Logo.jpg" alt="شعار المعهد" class="rounded-full shadow-lg border-4 border-red-custom transform transition-transform hover:scale-110">
-        </div>
-
-        <!-- Slider Section -->
-        <div class="relative w-full overflow-hidden mb-6 mt-6">
-            <div id="image-slider" class="flex transition-transform duration-500 ease-in-out">
-                <!-- Slider Images - Placeholder -->
-                <img src="03.jpg" alt="Slider Image 1" class="slider-image flex-shrink-0">
-                <img src="04.jpg" alt="Slider Image 2" class="slider-image flex-shrink-0">
-                <img src="05.jpg" alt="Slider Image 3" class="slider-image flex-shrink-0">
-                <img src="06.jpg" alt="Slider Image 3" class="slider-image flex-shrink-0">
-                <img src="07.jpg" alt="Slider Image 3" class="slider-image flex-shrink-0">
+    <!-- Main Content Container -->
+    <div id="main-content" class="opacity-0 min-h-screen pb-16">
+        
+        <!-- Header Section with background image slider -->
+        <div class="header-slider relative mb-16">
+            <div class="slide active" style="background-image: url('03.jpg');"></div>
+            <div class="slide" style="background-image: url('04.jpg');"></div>
+            <div class="slide" style="background-image: url('05.jpg');"></div>
+            <div class="slide" style="background-image: url('06.jpg');"></div>
+            <div class="slide" style="background-image: url('07.jpg');"></div>
+            
+            <div class="logo-container">
+                <img src="Logo.jpg" alt="شعار المعهد" class="rounded-full shadow-lg border-4 border-white transform transition-transform hover:scale-110">
             </div>
-            <!-- Slider Navigation Buttons -->
-            <button onclick="prevSlide()" class="absolute top-1/2 right-4 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full hover:bg-black/80 transition-all">
-                <i class="fas fa-chevron-right"></i>
-            </button>
-            <button onclick="nextSlide()" class="absolute top-1/2 left-4 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full hover:bg-black/80 transition-all">
-                <i class="fas fa-chevron-left"></i>
-            </button>
         </div>
 
-        <!-- About Section -->
-        <div class="p-6 md:p-8">
-            <h2 class="text-3xl font-bold text-center text-red-custom mb-4">نبذة عن المعهد</h2>
-            <p class="text-lg text-black text-center leading-relaxed">
-                المعهد العالى للفنون التطبيقية بمدينه السادس من أكتوبر معهد عالى خاص تابع لجمعية الخدمات الثقافية لرعاية الفنون المشهرة تحت رقم 1173 لسنه 1994 ويخضع لاشراف وزاره التعليم العالى. وانشئ المعهد بالقرار الوزارى رقم 1448 لسنه 1994 ويمنح المعهد درجة البكالوريوس فى الفنون التطبيقية والمعادلة من المجلس الاعلى للجامعات لدرجة البكالوريوس التى تمنحها الجامعات المصرية وقد انتهجت إدارة المعهد توقيع عده اتفاقيات فى مجال التعاون العلمى والبحوث المشتركة والدراسات العليا مع عدد من الجامعات ذات السمعه العالية.
-            </p>
-        </div>
+        <!-- Main Info Section -->
+        <div class="w-full max-w-4xl mx-auto -mt-16 relative z-10">
+            <!-- About Section -->
+            <div class="bg-white text-black p-6 md:p-8 rounded-3xl shadow-xl mb-8 border-2 border-red-custom">
+                <h1 class="text-3xl md:text-4xl font-extrabold text-center mb-4 text-red-custom">المعهد العالي للفنون التطبيقية بالسادس من أكتوبر</h1>
+                <p class="text-base md:text-lg text-center leading-relaxed">
+                    المعهد العالى للفنون التطبيقية بمدينه السادس من أكتوبر معهد عالى خاص تابع لجمعية الخدمات الثقافية لرعاية الفنون المشهرة تحت رقم 1173 لسنه 1994 ويخضع لاشراف وزاره التعليم العالى. وانشئ المعهد بالقرار الوزارى رقم 1448 لسنه 1994 ويمنح المعهد درجة البكالوريوس فى الفنون التطبيقية والمعادلة من المجلس الاعلى للجامعات لدرجة البكالوريوس التى تمنحها الجامعات المصرية وقد انتهجت إدارة المعهد توقيع عده اتفاقيات فى مجال التعاون العلمى والبحوث المشتركة والدراسات العليا مع عدد من الجامعات ذات السمعه العالية.
+                </p>
+            </div>
 
-        <!-- Social Media Links Section -->
-        <div class="bg-gray-50 p-6 md:p-8 border-t border-gray-200">
-            <h2 class="text-3xl font-bold text-center text-red-custom mb-6">روابط التواصل</h2>
-            <div class="flex flex-wrap justify-center items-center gap-6">
-                <!-- Website Link -->
-                <a href="https://appliedarts.edu.eg/" target="_blank" class="flex flex-col items-center p-4 rounded-xl hover:bg-red-100 transition-colors transform hover:scale-110">
-                    <i class="fas fa-globe text-4xl text-black transition-colors hover:text-red-custom"></i>
-                    <span class="mt-2 text-sm font-bold text-black">الموقع</span>
-                </a>
-                <!-- Location Link -->
-                <a href="https://maps.app.goo.gl/wcfj15H5xR4J3mbr9" target="_blank" class="flex flex-col items-center p-4 rounded-xl hover:bg-red-100 transition-colors transform hover:scale-110">
-                    <i class="fas fa-map-marker-alt text-4xl text-black transition-colors hover:text-red-custom"></i>
-                    <span class="mt-2 text-sm font-bold text-black">اللوكيشن</span>
-                </a>
-                <!-- Email Placeholder -->
-                <a href="info@appliedarts.edu.eg" class="flex flex-col items-center p-4 rounded-xl hover:bg-red-100 transition-colors transform hover:scale-110">
-                    <i class="fas fa-envelope text-4xl text-black transition-colors hover:text-red-custom"></i>
-                    <span class="mt-2 text-sm font-bold text-black">البريد الإلكتروني</span>
-                </a>
-                <!-- Facebook Link -->
-                <a href="https://www.facebook.com/share/1GeAz2BA4n/" target="_blank" class="flex flex-col items-center p-4 rounded-xl hover:bg-red-100 transition-colors transform hover:scale-110">
-                    <i class="fab fa-facebook text-4xl text-black transition-colors hover:text-red-custom"></i>
-                    <span class="mt-2 text-sm font-bold text-black">فيسبوك</span>
-                </a>
-                <!-- Instagram Link -->
-                <a href="https://www.instagram.com/thehigherinstituteofappliearts?igsh=ejc0MXk1cW40NmZr" target="_blank" class="flex flex-col items-center p-4 rounded-xl hover:bg-red-100 transition-colors transform hover:scale-110">
-                    <i class="fab fa-instagram text-4xl text-black transition-colors hover:text-red-custom"></i>
-                    <span class="mt-2 text-sm font-bold text-black">انستجرام</span>
-                </a>
-                <!-- TikTok Link -->
-                <a href="https://www.tiktok.com/@higherinstituteofapplied?_t=ZS-8znjVU8faqe&_r=1" target="_blank" class="flex flex-col items-center p-4 rounded-xl hover:bg-red-100 transition-colors transform hover:scale-110">
-                    <i class="fab fa-tiktok text-4xl text-black transition-colors hover:text-red-custom"></i>
-                    <span class="mt-2 text-sm font-bold text-black">تيك توك</span>
-                </a>
+            <!-- Social Media Links Section -->
+            <div class="bg-white text-black p-6 md:p-8 rounded-3xl shadow-xl border-2 border-red-custom">
+                <h2 class="text-2xl font-bold text-center mb-6 text-red-custom">روابط التواصل</h2>
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-6 justify-items-center">
+                    <!-- Website Link -->
+                    <a href="https://appliedarts.edu.eg/" target="_blank" class="w-full flex flex-col items-center justify-center p-4 rounded-xl bg-white shadow hover:bg-gray-100 transition-colors transform hover:scale-110">
+                        <i class="fas fa-globe text-3xl text-black"></i>
+                        <span class="mt-2 text-sm font-bold text-black">الموقع</span>
+                    </a>
+                    <!-- Location Link -->
+                    <a href="https://maps.app.goo.gl/wcfj15H5xR4J3mbr9" target="_blank" class="w-full flex flex-col items-center justify-center p-4 rounded-xl bg-white shadow hover:bg-gray-100 transition-colors transform hover:scale-110">
+                        <i class="fas fa-map-marker-alt text-3xl text-black"></i>
+                        <span class="mt-2 text-sm font-bold text-black">اللوكيشن</span>
+                    </a>
+                    <!-- Email Placeholder -->
+                    <a href="info@appliedarts.edu.eg" class="w-full flex flex-col items-center justify-center p-4 rounded-xl bg-white shadow hover:bg-gray-100 transition-colors transform hover:scale-110">
+                        <i class="fas fa-envelope text-3xl text-black"></i>
+                        <span class="mt-2 text-sm font-bold text-black">البريد الإلكتروني</span>
+                    </a>
+                    <!-- Facebook Link -->
+                    <a href="https://www.facebook.com/share/1GeAz2BA4n/" target="_blank" class="w-full flex flex-col items-center justify-center p-4 rounded-xl bg-white shadow hover:bg-gray-100 transition-colors transform hover:scale-110">
+                        <i class="fab fa-facebook text-3xl text-black"></i>
+                        <span class="mt-2 text-sm font-bold text-black">فيسبوك</span>
+                    </a>
+                    <!-- Instagram Link -->
+                    <a href="https://www.instagram.com/thehigherinstituteofappliearts?igsh=ejc0MXk1cW40NmZr" target="_blank" class="w-full flex flex-col items-center justify-center p-4 rounded-xl bg-white shadow hover:bg-gray-100 transition-colors transform hover:scale-110">
+                        <i class="fab fa-instagram text-3xl text-black"></i>
+                        <span class="mt-2 text-sm font-bold text-black">انستجرام</span>
+                    </a>
+                    <!-- TikTok Link -->
+                    <a href="https://www.tiktok.com/@higherinstituteofapplied?_t=ZS-8znjVU8faqe&_r=1" target="_blank" class="w-full flex flex-col items-center justify-center p-4 rounded-xl bg-white shadow hover:bg-gray-100 transition-colors transform hover:scale-110">
+                        <i class="fab fa-tiktok text-3xl text-black"></i>
+                        <span class="mt-2 text-sm font-bold text-black">تيك توك</span>
+                    </a>
+                </div>
             </div>
         </div>
 
     </div>
 
     <script>
-        // JavaScript for the image slider
-        const slider = document.getElementById('image-slider');
-        let currentIndex = 0;
-        let slideInterval;
-
-        function updateSlider() {
-            const imageWidth = slider.querySelector('img').clientWidth;
-            slider.style.transform = `translateX(-${currentIndex * imageWidth}px)`;
+        // JavaScript for the splash screen
+        document.addEventListener("DOMContentLoaded", function() {
+            const splashScreen = document.getElementById('splash-screen');
+            const mainContent = document.getElementById('main-content');
+            
+            // Wait for 2 seconds before fading out the splash screen
+            setTimeout(() => {
+                splashScreen.style.opacity = '0';
+                // After the fade-out, hide the splash screen and show the main content
+                setTimeout(() => {
+                    splashScreen.style.display = 'none';
+                    mainContent.classList.add('fade-in');
+                }, 1000); // This should match the CSS transition duration
+            }, 2000); // Duration to show the splash screen
+        });
+        
+        // JavaScript for the header slider
+        const slides = document.querySelectorAll('.header-slider .slide');
+        let currentSlide = 0;
+        
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                if (i === index) {
+                    slide.classList.add('active');
+                } else {
+                    slide.classList.remove('active');
+                }
+            });
         }
-
+        
         function nextSlide() {
-            const totalImages = slider.children.length;
-            currentIndex = (currentIndex + 1) % totalImages;
-            updateSlider();
+            currentSlide = (currentSlide + 1) % slides.length;
+            showSlide(currentSlide);
         }
+        
+        setInterval(nextSlide, 5000); // Change slide every 5 seconds
 
-        function prevSlide() {
-            const totalImages = slider.children.length;
-            currentIndex = (currentIndex - 1 + totalImages) % totalImages;
-            updateSlider();
-        }
+        // Initially show the first slide
+        showSlide(currentSlide);
 
-        // Auto-slide functionality
-        function startAutoSlide() {
-            slideInterval = setInterval(nextSlide, 3000); // Change image every 3 seconds
-        }
-
-        function stopAutoSlide() {
-            clearInterval(slideInterval);
-        }
-
-        // Event listeners for user interaction
-        slider.addEventListener('mouseenter', stopAutoSlide);
-        slider.addEventListener('mouseleave', startAutoSlide);
-
-        // Start auto-slide on window load
-        window.onload = function() {
-            startAutoSlide();
-            window.addEventListener('resize', updateSlider); // Make it responsive
-        }
     </script>
 </body>
 </html>
